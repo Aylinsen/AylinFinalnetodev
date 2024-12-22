@@ -1,0 +1,109 @@
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h1 class="text-primary">@ViewData["Title"]</h1>
+        <p class="text-muted">Fill out the form below to create a new user.</p>
+    </div>
+
+    <div class="card shadow-sm p-4">
+        <h4 class="text-secondary mb-4">User Details</h4>
+        <form asp-action="Create" autocomplete="off">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+
+            <!-- Username -->
+            <div class="mb-3 row">
+                <label asp-for="Username" class="col-3 col-form-label fw-bold">Username:</label>
+                <div class="col-8">
+                    <input asp-for="Username" class="form-control" placeholder="Enter username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Prof -->
+            <div class="mb-3 row">
+                <label asp-for="Prof" class="col-3 col-form-label fw-bold">Profile Type:</label>
+                <div class="col-8">
+                    <select asp-for="Prof" class="form-select">
+                        <option value="0">Normal</option>
+                        <option value="1">Prof</option>
+                    </select>
+                    <span asp-validation-for="Prof" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- BirthDate -->
+            <div class="mb-3 row">
+                <label asp-for="BirthDate" class="col-3 col-form-label fw-bold">Birth Date:</label>
+                <div class="col-8">
+                    <input asp-for="BirthDate" class="form-control datetimepicker" type="text" placeholder="MM/DD/YYYY" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- IsAdmin -->
+            <div class="mb-3 row">
+                <label asp-for="IsAdmin" class="col-3 col-form-label fw-bold">Is Admin:</label>
+                <div class="col-8 pt-2">
+                    <input class="form-check-input" asp-for="IsAdmin" />
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3 row">
+                <label asp-for="Email" class="col-3 col-form-label fw-bold">Email:</label>
+                <div class="col-8">
+                    <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3 row">
+                <label asp-for="Password" class="col-3 col-form-label fw-bold">Password:</label>
+                <div class="col-8">
+                    <input asp-for="Password" class="form-control" type="password" placeholder="Enter password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Posts -->
+            <div class="mb-3 row">
+                <label asp-for="PostIdsInput" class="col-3 col-form-label fw-bold">Posts:</label>
+                <div class="col-8">
+                    <select multiple asp-for="PostIdsInput" class="form-select" asp-items="ViewBag.Posts"></select>
+                    <span asp-validation-for="PostIdsInput" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="bi bi-save"></i> Save
+                </button>
+                <button type="reset" class="btn btn-outline-secondary me-2">
+                    <i class="bi bi-arrow-repeat"></i> Reset
+                </button>
+                <a asp-action="Index" class="btn btn-link">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.full.min.js"></script>
+
+    <script>
+        $(function () {
+            $(".datetimepicker").datetimepicker({
+                timepicker: false,
+                format: "m/d/Y"
+            });
+        });
+    </script>
+}

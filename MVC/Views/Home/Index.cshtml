@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var isAdmin = ViewData["IsAdmin"] as bool? ?? false;
+}
+
+<div class="text-center">
+    <h1 class="display-4">AYLIN FINAL ODEV
+    </h1>
+</div>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Welcome to your ASP.NET Core application.</p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form id="logoutForm" asp-area="" asp-controller="Users" asp-action="Logout" method="post">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    }
+</div>
+
+<div class="container text-center mt-4">
+    @if (isAdmin)
+    {
+        <div class="card shadow-sm p-4 mb-4">
+            <h2 class="text-primary">Admin Features</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a asp-controller="Categories" asp-action="Index" class="btn btn-outline-primary btn-sm">
+                        Manage Categories
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a asp-controller="Users" asp-action="Index" class="btn btn-outline-primary btn-sm">
+                        Manage Users
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a asp-controller="Posts" asp-action="Index" class="btn btn-outline-primary btn-sm">
+                        Manage Posts
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    else if (User.Identity.IsAuthenticated)
+    {
+        <div class="card shadow-sm p-4">
+            <h2 class="text-success">User Features</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a asp-controller="Posts" asp-action="Index" class="btn btn-outline-success btn-sm">
+                        View Posts
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning mt-4">
+            <h4 class="text-warning">You need to log in to see features!</h4>
+        </div>
+    }
+</div>

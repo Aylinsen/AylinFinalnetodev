@@ -1,0 +1,98 @@
+﻿@model UserModel
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Edit">
+		@Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="Username" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Username" class="form-control" />
+					<span asp-validation-for="Username" class="text-danger"></span>
+				</div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Prof" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="Prof" class="form-select">
+						<option value="0">Normal</option>
+						<option value="1">Prof</option>
+
+					</select>
+					<span asp-validation-for="Prof" class="text-danger"></span>
+				</div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="BirthDate" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="BirthDate" class="form-control  datetimepicker" type="text" />
+					<span asp-validation-for="BirthDate" class="text-danger"></span>
+				</div>
+            </div>
+            <div class="row mb-3">
+				<label asp-for="IsAdmin" class="col-2 col-form-label"></label>
+				<div class="col-5" style="padding-top: 7px;">
+					<input class="form-check-input" asp-for="IsAdmin" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Email" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Email" class="form-control" />
+					<span asp-validation-for="Email" class="text-danger"></span>
+				</div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Password" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Password" class="form-control" />
+					<span asp-validation-for="Password" class="text-danger"></span>
+				</div>
+            </div>
+			<div class="row mb-3">
+				<label asp-for="PostIdsInput" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select multiple asp-for="PostIdsInput" class="form-select" asp-items="ViewBag.Posts"></select>
+					<span asp-validation-for="PostIdsInput" class="text-danger"></span>
+				</div>
+			</div>
+
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-3">
+				<div class="offset-2 col-5">
+					<input type="submit" value="Save" class="btn btn-primary" />
+					&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-outline-primary">Reset</button>
+					&nbsp;&nbsp;
+					<a asp-action="Index">Back to List</a>
+				</div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+	<link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+	<script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.full.min.js"></script>
+
+	<script>
+		$(function () {
+			$(".datetimepicker").datetimepicker({
+				timepicker: false,
+				format: "m/d/Y"
+			});
+		});
+	</script>
+}
+
+

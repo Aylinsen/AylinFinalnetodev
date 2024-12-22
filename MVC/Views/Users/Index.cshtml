@@ -1,0 +1,59 @@
+﻿@model IEnumerable<UserModel>
+@{
+    ViewData["Title"] = "Users Listed";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h1 class="text-primary">@ViewData["Title"]</h1>
+    </div>
+
+    @if (TempData["Message"] is not null)
+    {
+        <div class="alert alert-info text-black" role="alert">
+            @TempData["Message"]
+        </div>
+    }
+
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-person-plus"></i> Create New
+        </a>
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FullNameOutput)</th>
+                <th>@Html.DisplayNameFor(model => model.BirthDateOutput)</th>
+                <th>@Html.DisplayNameFor(model => model.IsAdminOutput)</th>
+                <th>@Html.DisplayNameFor(model => model.EmailOutput)</th>
+                <th>@Html.DisplayNameFor(model => model.PasswordOutput)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FullNameOutput)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BirthDateOutput)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsAdminOutput)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EmailOutput)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PasswordOutput)</td>
+                    <td class="text-center">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm me-1">
+                            <i class="bi bi-eye"></i> Details
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-1">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
